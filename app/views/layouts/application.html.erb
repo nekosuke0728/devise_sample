@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sayoapp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <!-- 仮リンク -->
+    <%= link_to "トップページ", root_path %>
+    <% if admin_signed_in? %>
+      <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
+    <% elsif user_signed_in? %>
+      <%= link_to "ユーザーログアウト", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "管理者登録", new_admin_registration_path %>
+      <%= link_to "管理者ログイン", new_admin_session_path %>
+      <%= link_to "ユーザー登録", new_user_registration_path %>
+      <%= link_to "ユーザーログイン", new_user_session_path %>
+    <% end %>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+
+  </body>
+</html>
